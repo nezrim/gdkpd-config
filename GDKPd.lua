@@ -3,7 +3,7 @@
 local table, tinsert, tremove, pairs, ipairs, unpack, math, tostring, tonumber, select, _G, strlen, setmetatable, string, print, next, type, rawget, date = 
 	  table, tinsert, tremove, pairs, ipairs, unpack, math, tostring, tonumber, select, _G, strlen, setmetatable, string, print, next, type, rawget, date
 local SendAddonMessage, SendChatMessage, UnitIsRaidOfficer, UnitIsUnit, UnitIsGroupLeader, GetMasterLootCandidate, GetNumLootItems, GetLootSlotLink, GiveMasterLoot, UnitName, GetUnitName, CreateFrame, GetCVar, GetCVarBool, GetTime, StaticPopup_Show, GetItemInfo, GameTooltip, LibStub, ITEM_QUALITY_COLORS, InCombatLockdown, ERR_TRADE_COMPLETE, GetPlayerTradeMoney, GetTargetTradeMoney, GetItemIcon, ClearCursor, GetNumGroupMembers, GetRaidRosterInfo, GetLootThreshold, GetLootSlotType, GetLootSlotInfo, EditBox_HandleTabbing, GetCursorInfo, PickupItem, IsInRaid, IsInGroup, SendMail, SetSendMailMoney, ClearSendMail =
-	  C_ChatInfo.SendAddonMessage, SendChatMessage, UnitIsRaidOfficer, UnitIsUnit, UnitIsGroupLeader, GetMasterLootCandidate, GetNumLootItems, GetLootSlotLink, GiveMasterLoot, UnitName, GetUnitName, CreateFrame, GetCVar, GetCVarBool, GetTime, StaticPopup_Show, GetItemInfo, GameTooltip, LibStub, ITEM_QUALITY_COLORS, InCombatLockdown, ERR_TRADE_COMPLETE, GetPlayerTradeMoney, GetTargetTradeMoney, GetItemIcon, ClearCursor, GetNumGroupMembers, GetRaidRosterInfo, GetLootThreshold, GetLootSlotType, GetLootSlotInfo, EditBox_HandleTabbing, GetCursorInfo, PickupItem, IsInRaid, IsInGroup, SendMail, SetSendMailMoney, ClearSendMail
+	  SendAddonMessage, SendChatMessage, UnitIsRaidOfficer, UnitIsUnit, UnitIsGroupLeader, GetMasterLootCandidate, GetNumLootItems, GetLootSlotLink, GiveMasterLoot, UnitName, GetUnitName, CreateFrame, GetCVar, GetCVarBool, GetTime, StaticPopup_Show, GetItemInfo, GameTooltip, LibStub, ITEM_QUALITY_COLORS, InCombatLockdown, ERR_TRADE_COMPLETE, GetPlayerTradeMoney, GetTargetTradeMoney, GetItemIcon, ClearCursor, GetNumGroupMembers, GetRaidRosterInfo, GetLootThreshold, GetLootSlotType, GetLootSlotInfo, EditBox_HandleTabbing, GetCursorInfo, PickupItem, IsInRaid, IsInGroup, SendMail, SetSendMailMoney, ClearSendMail
 local _
 local UIParent, MailFrame =
 	  UIParent, MailFrame
@@ -18,7 +18,7 @@ local emptytable = select(2,...).emptytable
 local DEBUGFORCEVERSION
 
 --[===[@debug@
-DEBUGFORCEVERSION="2.0.0"
+DEBUGFORCEVERSION="1.4.2"
 --@end-debug@]===]
 -- fetch locale data
 local L = LibStub("AceLocale-3.0"):GetLocale("GDKPd")
@@ -31,9 +31,82 @@ local VERSIONING_STRINGS = {
 	INCOMPATIBLE_VERSIONCHECK = L["This version will be unable to recognize version check requests by you. Version check requests sent by this version of GDKPd will not be answered."],
 }
 local COMPATIBLE_VERSIONS = {
-	["2.0.0"]=true,
+	["1.4.2"]=true,
+	["beta-18"]=true,
+	["1.4.1"]=true,
+	["beta-17a"]=true,
+	["beta-17"]=true,
+	["1.4.0"]=true,
+	["beta-16"]=true,
+	["1.3.0"]=true,
+	["beta-15b"]=true,
+	["beta-15a"]=true,
+	["beta-15"]=true,
+	["1.2.0"]=true,
 }
 local INCOMPATIBLE_VERSIONS = {
+	["1.1.4"]={"INCOMPATIBLE_VERSIONCHECK"},
+	["beta-14f"]={"INCOMPATIBLE_VERSIONCHECK"},
+	["beta-14e"]={"INCOMPATIBLE_VERSIONCHECK"},
+	["beta-14d"]={"INCOMPATIBLE_VERSIONCHECK"},
+	["1.1.3"]={"INCOMPATIBLE_VERSIONCHECK"},
+	["beta-14c"]={"INCOMPATIBLE_VERSIONCHECK"},
+	["1.1.2"]={"INCOMPATIBLE_VERSIONCHECK"},
+	["1.1.1"]={"INCOMPATIBLE_VERSIONCHECK"},
+	["beta-14b"]={"INCOMPATIBLE_VERSIONCHECK"},
+	["beta-14a"]={"INCOMPATIBLE_VERSIONCHECK"},
+	["beta-14"]={"INCOMPATIBLE_VERSIONCHECK"},
+	["1.1.0"]={"INCOMPATIBLE_VERSIONCHECK"},
+	["beta-13c"]={"INCOMPATIBLE_VERSIONCHECK"},
+	["beta-13b"]={"INCOMPATIBLE_VERSIONCHECK"},
+	["beta-13a"]={"INCOMPATIBLE_VERSIONCHECK"},
+	["beta-13"]={"VERSION_NONFUNCTIONAL"},
+	["beta-12"]={"INCOMPATIBLE_AUCTIONCANCEL"},
+	["1.0.0a"]={"INCOMPATIBLE_AUCTIONCANCEL"},
+	["1.0.0"]={"INCOMPATIBLE_AUCTIONCANCEL"},
+	["beta-11s"]={"INCOMPATIBLE_AUCTIONCANCEL"},
+	["beta-11r"]={"INCOMPATIBLE_AUCTIONCANCEL"},
+	["beta-11q"]={"INCOMPATIBLE_AUCTIONCANCEL"},
+	["beta-11p"]={"INCOMPATIBLE_AUCTIONCANCEL"},
+	["beta-11o"]={"INCOMPATIBLE_AUCTIONCANCEL"},
+	["beta-11m"]={"INCOMPATIBLE_AUCTIONCANCEL"},
+	["beta-11l"]={"INCOMPATIBLE_AUCTIONCANCEL"},
+	["beta-11i"]={"INCOMPATIBLE_AUCTIONCANCEL"},
+	["beta-11h"]={"INCOMPATIBLE_AUCTIONCANCEL"},
+	["beta-11g"]={"INCOMPATIBLE_AUCTIONCANCEL"},
+	["beta-11f"]={"INCOMPATIBLE_AUCTIONCANCEL"},
+	["beta-11e"]={"INCOMPATIBLE_AUCTIONCANCEL"},
+	["beta-11d"]={"INCOMPATIBLE_AUCTIONCANCEL"},
+	["beta-11c"]={"INCOMPATIBLE_AUCTIONCANCEL"},
+	["beta-11b"]={"INCOMPATIBLE_AUCTIONCANCEL"},
+	["beta-11a"]={"INCOMPATIBLE_AUCTIONCANCEL"},
+	["beta-11"]={"INCOMPATIBLE_AUCTIONCANCEL"},
+	["beta-11n"]={"VERSION_NONFUNCTIONAL"},
+	["beta-11k"]={"INCOMPATIBLE_DISTRIBUTE","INCOMPATIBLE_AUCTIONCANCEL"},
+	["beta-11j"]={"INCOMPATIBLE_DISTRIBUTE","INCOMPATIBLE_AUCTIONCANCEL"},
+	["beta-10h"]={"INCOMPATIBLE_AUCTIONSTART","INCOMPATIBLE_AUCTIONCANCEL","INCOMPATIBLE_DISTRIBUTE"},
+	["beta-10g"]={"INCOMPATIBLE_AUCTIONSTART","INCOMPATIBLE_AUCTIONCANCEL","INCOMPATIBLE_DISTRIBUTE"},
+	["beta-10f"]={"INCOMPATIBLE_AUCTIONSTART","INCOMPATIBLE_AUCTIONCANCEL","INCOMPATIBLE_DISTRIBUTE"},
+	["beta-10e"]={"INCOMPATIBLE_AUCTIONSTART","INCOMPATIBLE_AUCTIONCANCEL","INCOMPATIBLE_DISTRIBUTE"},
+	["beta-10d"]={"INCOMPATIBLE_AUCTIONSTART","INCOMPATIBLE_AUCTIONCANCEL","INCOMPATIBLE_DISTRIBUTE"},
+	["beta-10c"]={"INCOMPATIBLE_AUCTIONSTART","INCOMPATIBLE_AUCTIONCANCEL","INCOMPATIBLE_DISTRIBUTE"},
+	["beta-10b"]={"INCOMPATIBLE_AUCTIONSTART","INCOMPATIBLE_AUCTIONCANCEL","INCOMPATIBLE_DISTRIBUTE"},
+	["beta-10a"]={"INCOMPATIBLE_AUCTIONSTART","INCOMPATIBLE_AUCTIONCANCEL","INCOMPATIBLE_DISTRIBUTE"},
+	["beta-10"]={"VERSION_NONFUNCTIONAL"},
+	["beta-9a"]={"INCOMPATIBLE_AUCTIONSTART","INCOMPATIBLE_AUCTIONCANCEL","INCOMPATIBLE_DISTRIBUTE"},
+	["beta-9"]={"INCOMPATIBLE_AUCTIONSTART","INCOMPATIBLE_AUCTIONCANCEL","INCOMPATIBLE_DISTRIBUTE"},
+	["beta-8"]={"INCOMPATIBLE_AUCTIONSTART","INCOMPATIBLE_AUCTIONCANCEL","INCOMPATIBLE_DISTRIBUTE"},
+	["beta-7b"]={"INCOMPATIBLE_AUCTIONSTART","INCOMPATIBLE_AUCTIONCANCEL","INCOMPATIBLE_DISTRIBUTE"},
+	["beta-7a"]={"INCOMPATIBLE_AUCTIONSTART","INCOMPATIBLE_AUCTIONCANCEL","INCOMPATIBLE_DISTRIBUTE"},
+	["beta-7"]={"INCOMPATIBLE_AUCTIONSTART","INCOMPATIBLE_AUCTIONCANCEL","INCOMPATIBLE_DISTRIBUTE"},
+	["beta-6"]={"INCOMPATIBLE_AUCTIONSTART","INCOMPATIBLE_AUCTIONCANCEL","INCOMPATIBLE_DISTRIBUTE"},
+	["beta-5"]={"INCOMPATIBLE_AUCTIONSTART","INCOMPATIBLE_AUCTIONCANCEL","INCOMPATIBLE_DISTRIBUTE"},
+	["beta-4"]={"INCOMPATIBLE_AUCTIONSTART","INCOMPATIBLE_AUCTIONCANCEL","INCOMPATIBLE_DISTRIBUTE"},
+	["beta-3"]={"INCOMPATIBLE_AUCTIONSTART","INCOMPATIBLE_AUCTIONCANCEL","INCOMPATIBLE_DISTRIBUTE"},
+	["beta-2b"]={"INCOMPATIBLE_AUCTIONSTART","INCOMPATIBLE_AUCTIONCANCEL","INCOMPATIBLE_DISTRIBUTE"},
+	["beta-2a"]={"INCOMPATIBLE_AUCTIONSTART","INCOMPATIBLE_AUCTIONCANCEL","INCOMPATIBLE_DISTRIBUTE"},
+	["beta-2"]={"INCOMPATIBLE_AUCTIONSTART","INCOMPATIBLE_AUCTIONCANCEL","INCOMPATIBLE_DISTRIBUTE"},
+	["beta-1a"]={"INCOMPATIBLE_AUCTIONSTART","INCOMPATIBLE_AUCTIONCANCEL","INCOMPATIBLE_DISTRIBUTE"},
 	["beta-1"]={"INCOMPATIBLE_AUCTIONSTART","INCOMPATIBLE_AUCTIONCANCEL","INCOMPATIBLE_DISTRIBUTE"},
 }
 
@@ -277,8 +350,16 @@ StaticPopupDialogs["GDKPD_CURPOTCLICK"]={
 	button3=CANCEL,
 	OnShow=function(self) self.button3:Disable() end,
 	OnAccept=function(self)
+		--[[local output = "GDKPd pot data for Current Pot\nPot size: "..GDKPd_PotData.potAmount.." gold"
+		for _, aucdata in ipairs(GDKPd_PotData.curPotHistory) do
+			if type(aucdata) == "table" then
+				output = output.."\n"..(aucdata.item:match("(|h.+|h)"))..": "..aucdata.name.." ("..aucdata.bid.." gold)"
+			else
+				output = output.."\n"..L["Manual adjustment"]..": "..(aucdata > 0 and "+" or "")..aucdata.." gold"
+			end
+		end--]]
 		GDKPd.exportframe:Show()
-		GDKPd.exportframe:Set("", GDKPd_PotData.curPotHistory)
+		GDKPd.exportframe:Set("GDKPd pot data for Current Pot\nPot size: "..GDKPd_PotData.potAmount.." gold", GDKPd_PotData.curPotHistory)
 	end,
 	timeout=0,
 	whileDead=true,
@@ -379,7 +460,7 @@ GDKPd:SetScript("OnUpdate", function(self, elapsed)
 		local curPot = math.floor(self.curAuction.timeRemains/self.opt.countdownTimerJump)
 		self.curAuction.timeRemains = self.curAuction.timeRemains-elapsed
 		if (curPot ~= math.floor(self.curAuction.timeRemains/self.opt.countdownTimerJump)) and (curPot*self.opt.countdownTimerJump < self.opt.auctionTimer) and (not (next(self.curAuction.bidders,nil) and (curPot*self.opt.countdownTimerJump == self.opt.auctionTimerRefresh))) and (curPot > 0) then
-			SendChatMessage("[Caution] "..(curPot*self.opt.countdownTimerJump).." seconds remaining!","RAID")
+			SendChatMessage("[GDKPd] "..(curPot*self.opt.countdownTimerJump).." seconds remaining!","RAID")
 		end
 		if self.curAuction.timeRemains <= 0 then
 			self:Hide()
@@ -392,7 +473,7 @@ GDKPd:SetScript("OnUpdate", function(self, elapsed)
 			local curPot = math.floor(aucdata.timeRemains/self.opt.countdownTimerJump)
 			aucdata.timeRemains = aucdata.timeRemains-elapsed
 			if (curPot ~= math.floor(aucdata.timeRemains/self.opt.countdownTimerJump)) and (curPot*self.opt.countdownTimerJump < self.opt.auctionTimer) and (not (next(aucdata.bidders,nil) and (curPot*self.opt.countdownTimerJump == self.opt.auctionTimerRefresh))) and (curPot > 0) then
-				SendChatMessage("[Caution] "..(curPot*self.opt.countdownTimerJump).." seconds remaining for item "..item.."!","RAID")
+				SendChatMessage("[GDKPd] "..(curPot*self.opt.countdownTimerJump).." seconds remaining for item "..item.."!","RAID")
 			end
 			if aucdata.timeRemains <= 0 then
 				tinsert(auctionsToFinish, item)
@@ -432,21 +513,21 @@ anchor.movetx.text = anchor:CreateFontString()
 anchor.movetx.text:SetFontObject(GameFontHighlightLarge)
 anchor.movetx.text:SetText(L["GDKPd: Drag to move\n/gdkpd and check \"Lock\" to hide"])
 anchor.movetx.text:SetAllPoints()
-GDKPd.status = CreateFrame("Frame", "GDKPd_Status", UIParent, BackdropTemplateMixin and "BackdropTemplate")
+GDKPd.status = CreateFrame("Frame", "GDKPd_Status", UIParent)
 local status = GDKPd.status
 status:SetSize(200, 90)
 status:Hide()
 status:SetBackdrop({
-	bgFile="Interface\\DialogFrame\\UI-DialogBox-Gold-Background",
-	edgeFile="Interface\\DialogFrame\\UI-DialogBox-Gold-Border",
+	bgFile="Interface\\DialogFrame\\UI-DialogBox-Background",
+	edgeFile="Interface\\DialogFrame\\UI-DialogBox-Border",
 	tileSize=32,
-	edgeSize=24,
+			 
 	tile=true,
 	insets={
-		top=6,
-		bottom=6,
-		right=6,
-		left=6,
+		top=12,
+		bottom=12,
+		right=12,
+		left=12,
 	},
 })
 function status:UpdateVisibility(forceCombat)
@@ -461,7 +542,7 @@ function status:UpdateVisibility(forceCombat)
 	end
 end
 status.header = CreateFrame("Button", nil, status)
-status.header:SetNormalTexture("Interface\\DialogFrame\\UI-DialogBox-Gold-Header")
+status.header:SetNormalTexture("Interface\\DialogFrame\\UI-DialogBox-Header")
 status.header:SetSize(133,34)
 status.header.text = status.header:CreateFontString()
 status.header.text:SetPoint("TOP",0,-7)
@@ -611,7 +692,7 @@ status.noannounce:SetScript("OnClick", function(self)
 end)
 status.noannounce:Hide()
 function status:UpdateSize()
-	local height = 80 
+	local height = 80
 	height = height+status.text:GetHeight()
 	if status.announcetext:IsShown() then
 		height=height+status.announcetext:GetHeight()+5
@@ -637,25 +718,25 @@ function status:Update()
 	end
 	self:UpdateSize()
 end
-GDKPd.history = CreateFrame("Frame", "GDKPd_History", UIParent, BackdropTemplateMixin and "BackdropTemplate")
+GDKPd.history = CreateFrame("Frame", "GDKPd_History", UIParent)
 local history = GDKPd.history
 history:SetSize(200,95)
 history:Hide()
 history:SetBackdrop({
-	bgFile="Interface\\DialogFrame\\UI-DialogBox-Gold-Background",
-	edgeFile="Interface\\DialogFrame\\UI-DialogBox-Gold-Border",
+	bgFile="Interface\\DialogFrame\\UI-DialogBox-Background",
+	edgeFile="Interface\\DialogFrame\\UI-DialogBox-Border",
 	tileSize=32,
-	edgeSize=24,
+			 
 	tile=true,
 	insets={
-		top=6,
-		bottom=6,
-		right=6,
-		left=6,
+		top=12,
+		bottom=12,
+		right=12,
+		left=12,
 	},
 })
-history.header = CreateFrame("Button", nil, history, BackdropTemplateMixin and "BackdropTemplate")
-history.header:SetNormalTexture("Interface\\DialogFrame\\UI-DialogBox-Gold-Header")
+history.header = CreateFrame("Button", nil, history)
+history.header:SetNormalTexture("Interface\\DialogFrame\\UI-DialogBox-Header")
 history.header:SetSize(133,34)
 history.header:SetHitRectInsets(31.5,31.5,4.5,14.5)
 history.header.text = history.header:CreateFontString()
@@ -676,7 +757,7 @@ history:SetScript("OnShow", function(self)
 	self:Update()
 end)
 history.entries = setmetatable({},{__index=function(t,v)
-	local f = CreateFrame("Button", nil, history, BackdropTemplateMixin and "BackdropTemplate")
+	local f = CreateFrame("Button", nil, history)
 	if v > 1 then
 		f:SetPoint("TOPLEFT", t[v-1], "BOTTOMLEFT", 0, -5)
 		f:SetPoint("TOPRIGHT", t[v-1], "BOTTOMRIGHT", 0, -5)
@@ -760,7 +841,7 @@ history.entries = setmetatable({},{__index=function(t,v)
 	t[v]=f
 	return f
 end})
-history.hide = CreateFrame("Button", nil, history, "UIPanelButtonTemplate", BackdropTemplateMixin and "BackdropTemplate")
+history.hide = CreateFrame("Button", nil, history, "UIPanelButtonTemplate")
 history.hide:SetSize(170,15)
 history.hide:SetPoint("BOTTOM", 0, 15)
 history.hide:SetText(L["Hide"])
@@ -787,25 +868,25 @@ function history:Update()
 	end
 	self:SetHeight(size)
 end
-GDKPd.itemsettings = CreateFrame("Frame", "GDKPd_ItemSettings", UIParent, BackdropTemplateMixin and "BackdropTemplate")
+GDKPd.itemsettings = CreateFrame("Frame", "GDKPd_ItemSettings", UIParent)
 local itemsettings = GDKPd.itemsettings
 itemsettings:SetWidth(250)
 itemsettings:Hide()
 itemsettings:SetBackdrop({
-	bgFile="Interface\\DialogFrame\\UI-DialogBox-Gold-Background",
-	edgeFile="Interface\\DialogFrame\\UI-DialogBox-Gold-Border",
+	bgFile="Interface\\DialogFrame\\UI-DialogBox-Background",
+	edgeFile="Interface\\DialogFrame\\UI-DialogBox-Border",
 	tileSize=32,
-	edgeSize=24,
+			 
 	tile=true,
 	insets={
-		top=6,
-		bottom=6,
-		right=6,
-		left=6,
+		top=12,
+		bottom=12,
+		right=12,
+		left=12,
 	},
 })
-itemsettings.header = CreateFrame("Button", nil, itemsettings, BackdropTemplateMixin and "BackdropTemplate")
-itemsettings.header:SetNormalTexture("Interface\\DialogFrame\\UI-DialogBox-Gold-Header")
+itemsettings.header = CreateFrame("Button", nil, itemsettings)
+itemsettings.header:SetNormalTexture("Interface\\DialogFrame\\UI-DialogBox-Header")
 itemsettings.header:SetSize(133,34)
 itemsettings.header:SetHitRectInsets(31.5,31.5,4.5,14.5)
 itemsettings.header.text = itemsettings.header:CreateFontString()
@@ -825,7 +906,7 @@ itemsettings:SetPoint("TOP", itemsettings.header, "TOP", 0, -6)
 itemsettings:SetScript("OnShow", function(self)
 	self:Update()
 end)
-itemsettings.thead = CreateFrame("Frame", nil, itemsettings, BackdropTemplateMixin and "BackdropTemplate")
+itemsettings.thead = CreateFrame("Frame", nil, itemsettings)
 itemsettings.thead:SetPoint("TOPLEFT", 15, -15)
 itemsettings.thead:SetPoint("TOPRIGHT", -15, -15)
 itemsettings.thead:SetHeight(15)
@@ -847,9 +928,9 @@ itemsettings.thead.minincre:SetTextColor(1,0.82,0)
 itemsettings.thead.minincre:SetText(L["Minimum increment"])
 itemsettings.thead.minincre:SetPoint("LEFT", itemsettings.thead.startbid, "RIGHT")
 itemsettings.thead.minincre:SetPoint("RIGHT")
-itemsettings.scroll = CreateFrame("ScrollFrame", nil, itemsettings, BackdropTemplateMixin and "BackdropTemplate")
+itemsettings.scroll = CreateFrame("ScrollFrame", nil, itemsettings)
 itemsettings.scroll:SetPoint("TOPLEFT", itemsettings.thead, "BOTTOMLEFT", 0, -5)
-itemsettings.scroll.child = CreateFrame("Frame", nil, itemsettings.scroll, BackdropTemplateMixin and "BackdropTemplate")
+itemsettings.scroll.child = CreateFrame("Frame", nil, itemsettings.scroll)
 itemsettings.scroll.child:EnableMouseWheel(true)
 itemsettings.scroll.child:SetScript("OnMouseWheel", function(self, delta)
 	if delta == 1 then
@@ -865,7 +946,7 @@ itemsettings.scroll:SetScript("OnSizeChanged", function(self, width)
 	self:UpdateScrollChildRect()
 end)
 itemsettings.entries = setmetatable({}, {__index=function(t,v)
-	local f = CreateFrame("Frame", nil, itemsettings.scroll.child, BackdropTemplateMixin and "BackdropTemplate")
+	local f = CreateFrame("Frame", nil, itemsettings.scroll.child)
 	if v > 1 then
 		f:SetPoint("TOPLEFT", t[v-1], "BOTTOMLEFT", 0, -5)
 		f:SetPoint("TOPRIGHT", t[v-1], "BOTTOMRIGHT", 0, -5)
@@ -874,7 +955,7 @@ itemsettings.entries = setmetatable({}, {__index=function(t,v)
 		f:SetPoint("TOPRIGHT"--[[, itemsettings.thead, "BOTTOMRIGHT", 0, -5--]])
 	end
 	f:SetHeight(15)
-	f.itemicon = CreateFrame("Button", nil, f, BackdropTemplateMixin and "BackdropTemplate")
+	f.itemicon = CreateFrame("Button", nil, f)
 	f.itemicon:SetScript("OnEnter", function()
 		if not f.itemID then return end
 		GameTooltip:ClearAllPoints()
@@ -917,7 +998,7 @@ itemsettings.entries = setmetatable({}, {__index=function(t,v)
 		end
 	end)
 	f.itemicon:EnableMouse(true)
-	f.minBid = CreateFrame("EditBox", nil, f, BackdropTemplateMixin and "BackdropTemplate")
+	f.minBid = CreateFrame("EditBox", nil, f)
 	f.minBid:SetMultiLine(nil)
 	f.minBid:SetScript("OnEditFocusGained", function(self) if not f.itemID then self:ClearFocus() end end)
 	f.minBid:SetScript("OnEnterPressed", function(self) GDKPd.opt.customItemSettings[f.itemID].minBid = self:GetNumber() > 0 and self:GetNumber() or nil self:ClearFocus() itemsettings:Update() end)
@@ -950,7 +1031,7 @@ itemsettings.entries = setmetatable({}, {__index=function(t,v)
 	f.minBid.tex:SetPoint("BOTTOMRIGHT",f.minBid.g)
 	f.minBid.tex:SetAlpha(0.2)
 	f.minBid.tex:SetTexture(0.5,0.5,0.5)
-	f.minIncrement = CreateFrame("EditBox", nil, f, BackdropTemplateMixin and "BackdropTemplate")
+	f.minIncrement = CreateFrame("EditBox", nil, f)
 	f.minIncrement:SetMultiLine(nil)
 	f.minIncrement:SetScript("OnEditFocusGained", function(self) if not f.itemID then self:ClearFocus() end end)
 	f.minIncrement:SetScript("OnEnterPressed", function(self) GDKPd.opt.customItemSettings[f.itemID].minIncrement = self:GetNumber() > 0 and self:GetNumber() or nil self:ClearFocus() itemsettings:Update() end)
@@ -1022,31 +1103,31 @@ function itemsettings:Update()
 	self.scroll.child:SetHeight(20*(c-1)-5)
 	self:SetHeight(70+20*math.min(c-1,10))
 end
-itemsettings.hide = CreateFrame("Button", nil, itemsettings, "UIPanelButtonTemplate", BackdropTemplateMixin and "BackdropTemplate")
+itemsettings.hide = CreateFrame("Button", nil, itemsettings, "UIPanelButtonTemplate")
 itemsettings.hide:SetSize(220, 15)
 itemsettings.hide:SetPoint("BOTTOM", 0, 15)
 itemsettings.hide:SetText(L["Hide"])
 itemsettings.hide:SetScript("OnClick", function() itemsettings:Hide() end)
 itemsettings.scroll:SetPoint("BOTTOMRIGHT", itemsettings.hide, "TOPRIGHT", 0, 10)
-GDKPd.itemLevels = CreateFrame("Frame", "GDKPd_ItemLevels", UIParent, BackdropTemplateMixin and "BackdropTemplate")
+GDKPd.itemLevels = CreateFrame("Frame", "GDKPd_ItemLevels", UIParent)
 local itemlevels = GDKPd.itemLevels
 itemlevels:SetWidth(250)
 itemlevels:Hide()
 itemlevels:SetBackdrop({
-	bgFile="Interface\\DialogFrame\\UI-DialogBox-Gold-Background",
-	edgeFile="Interface\\DialogFrame\\UI-DialogBox-Gold-Border",
+	bgFile="Interface\\DialogFrame\\UI-DialogBox-Background",
+	edgeFile="Interface\\DialogFrame\\UI-DialogBox-Border",
 	tileSize=32,
-	edgeSize=24,
+			 
 	tile=true,
 	insets={
-		top=6,
-		bottom=6,
-		right=6,
-		left=6,
+		top=12,
+		bottom=12,
+		right=12,
+		left=12,
 	},
 })
-itemlevels.header = CreateFrame("Button", nil, itemlevels, BackdropTemplateMixin and "BackdropTemplate")
-itemlevels.header:SetNormalTexture("Interface\\DialogFrame\\UI-DialogBox-Gold-Header")
+itemlevels.header = CreateFrame("Button", nil, itemlevels)
+itemlevels.header:SetNormalTexture("Interface\\DialogFrame\\UI-DialogBox-Header")
 itemlevels.header:SetSize(133,34)
 itemlevels.header:SetHitRectInsets(31.5,31.5,4.5,14.5)
 itemlevels.header.text = itemlevels.header:CreateFontString()
@@ -1066,7 +1147,7 @@ itemlevels:SetPoint("TOP", itemlevels.header, "TOP", 0 ,-6)
 itemlevels:SetScript("OnShow", function(self)
 	self:Update()
 end)
-itemlevels.thead = CreateFrame("Frame", nil, itemlevels, BackdropTemplateMixin and "BackdropTemplate")
+itemlevels.thead = CreateFrame("Frame", nil, itemlevels)
 itemlevels.thead:SetPoint("TOPLEFT", 15, -15)
 itemlevels.thead:SetPoint("TOPRIGHT", -15, -15)
 itemlevels.thead:SetHeight(15)
@@ -1099,7 +1180,7 @@ itemlevels.hide:SetSize(220,15)
 itemlevels.hide:SetPoint("BOTTOM", 0, 15)
 itemlevels.hide:SetText(L["Hide"])
 itemlevels.hide:SetScript("OnClick", function() itemlevels:Hide() end)
-itemlevels.add = CreateFrame("Frame", nil, itemlevels, BackdropTemplateMixin and "BackdropTemplate")
+itemlevels.add = CreateFrame("Frame", nil, itemlevels)
 itemlevels.add:SetPoint("BOTTOMLEFT", 15, 35)
 itemlevels.add:SetPoint("BOTTOMRIGHT", -15, 35)
 itemlevels.add:SetHeight(20)
@@ -1147,7 +1228,7 @@ itemlevels.add.mininc:SetNumeric(true)
 itemlevels.add.mininc:SetMaxLetters(5)
 itemlevels.add.mininc:SetScript("OnTabPressed", tabfunc)
 --itemlevels.add.mininc:SetJustifyH("RIGHT")
-itemlevels.add.add = CreateFrame("Button", nil, itemlevels.add, BackdropTemplateMixin and "BackdropTemplate")
+itemlevels.add.add = CreateFrame("Button", nil, itemlevels.add)
 itemlevels.add.add:SetSize(20,20)
 itemlevels.add.add:SetNormalTexture("Interface\\Buttons\\UI-PlusButton-Up")
 itemlevels.add.add:SetHighlightTexture("Interface\\Buttons\\UI-PlusButton-Hilight")
@@ -1168,7 +1249,7 @@ itemlevels.add.add:SetScript("OnClick", function()
 	end
 end)
 itemlevels.entries = setmetatable({}, {__index=function(t,v)
-	local f = CreateFrame("Frame", nil, itemlevels, BackdropTemplateMixin and "BackdropTemplate")
+	local f = CreateFrame("Frame", nil, itemlevels)
 	if v > 1 then
 		f:SetPoint("TOPLEFT", t[v-1], "BOTTOMLEFT", 0, -5)
 		f:SetPoint("TOPRIGHT", t[v-1], "BOTTOMRIGHT", 0, -5)
@@ -1207,7 +1288,7 @@ itemlevels.entries = setmetatable({}, {__index=function(t,v)
 		self.minbid:SetText(minbid.."|cffffd100g|r")
 		self.mininc:SetText(mininc.."|cffffd100g|r")
 	end
-	f.del = CreateFrame("Button", nil, f, BackdropTemplateMixin and "BackdropTemplate")
+	f.del = CreateFrame("Button", nil, f)
 	f.del:SetSize(15,15)
 	f.del:SetPoint("RIGHT", 5, 0)
 	f.del:SetNormalTexture("Interface\\Buttons\\UI-MinusButton-UP")
@@ -1236,25 +1317,25 @@ function itemlevels:Update()
 	end
 	self:SetHeight(height)
 end
-GDKPd.version = CreateFrame("Frame", "GDKPd_Versions", UIParent, BackdropTemplateMixin and "BackdropTemplate")
+GDKPd.version = CreateFrame("Frame", "GDKPd_Versions", UIParent)
 local version = GDKPd.version
 version:SetSize(200,85)
 version:Hide()
 version:SetBackdrop({
-	bgFile="Interface\\DialogFrame\\UI-DialogBox-Gold-Background",
-	edgeFile="Interface\\DialogFrame\\UI-DialogBox-Gold-Border",
+	bgFile="Interface\\DialogFrame\\UI-DialogBox-Background",
+	edgeFile="Interface\\DialogFrame\\UI-DialogBox-Border",
 	tileSize=32,
-	edgeSize=24,
+			 
 	tile=true,
 	insets={
-		top=6,
-		bottom=6,
-		right=6,
-		left=6,
+		top=12,
+		bottom=12,
+		right=12,
+		left=12,
 	},
 })
-version.header = CreateFrame("Button", nil, version, BackdropTemplateMixin and "BackdropTemplate")
-version.header:SetNormalTexture("Interface\\DialogFrame\\UI-DialogBox-Gold-Header")
+version.header = CreateFrame("Button", nil, version)
+version.header:SetNormalTexture("Interface\\DialogFrame\\UI-DialogBox-Header")
 version.header:SetSize(133,34)
 version.header:SetHitRectInsets(31.5,31.5,4.5,14.5)
 version.header.text = version.header:CreateFontString()
@@ -1275,7 +1356,7 @@ version:SetScript("OnShow", function(self)
 	self:Update()
 end)
 version.entries = setmetatable({},{__index=function(t,v)
-	local f = CreateFrame("Button", nil, version, BackdropTemplateMixin and "BackdropTemplate")
+	local f = CreateFrame("Button", nil, version)
 	if v > 1 then
 		f:SetPoint("TOPLEFT", t[v-1], "BOTTOMLEFT", 0, -5)
 		f:SetPoint("TOPRIGHT", t[v-1], "BOTTOMRIGHT", 0, -5)
@@ -1307,7 +1388,7 @@ version.entries = setmetatable({},{__index=function(t,v)
 			self:UpdateHeight()
 			return
 		end
-		if versionstring == (DEBUGFORCEVERSION or "2.0.0") then
+		if versionstring == (DEBUGFORCEVERSION or "1.4.2") then
 			f.version:SetTextColor(0,0.8,0)
 			f.name:SetText(name)
 			f.version:SetText(versionstring)
@@ -1374,11 +1455,11 @@ version.notify:SetScript("OnClick", function()
 	local f = rawget(version.entries,c)
 	while (f and f:IsShown()) do
 		if f.status == "outdated_compatible" and GDKPd.opt.notifyVersions.notifyCompatibleOutdated then
-			SendChatMessage(L["Your version of GDKPd is slightly outdated compared to the raid leader's. Full compability should be possible, however, you might want to take some time and update GDKPd."], "WHISPER", nil, f.name:GetText())
+			SendChatMessage(L["[GDKPd] Your version of GDKPd is slightly outdated compared to the raid leader's. Full compability should be possible, however, you might want to take some time and update GDKPd."], "WHISPER", nil, f.name:GetText())
 		elseif f.status == "outdated_incompatible"  and GDKPd.opt.notifyVersions.notifyIncompatibleOutdated then
-			SendChatMessage(L["Your version of GDKPd is outdated and no longer compatible with the raid leader's in one or more functionalities. In order to ensure smooth performance, please update GDKPd."], "WHISPER", nil, f.name:GetText())
+			SendChatMessage(L["[GDKPd] Your version of GDKPd is outdated and no longer compatible with the raid leader's in one or more functionalities. In order to ensure smooth performance, please update GDKPd."], "WHISPER", nil, f.name:GetText())
 		elseif f.status == "not_installed" and GDKPd.opt.notifyVersions.notifyNotInstalled then
-			SendChatMessage(L["This raid uses GDKPd to faciliate its GDKP bidding process. While you can bid on items without having GDKPd installed, installing it provides you with a GUI bidding panel, auto bidding functions, auction timers, chat filtering and more!"], "WHISPER", nil, f.name:GetText())
+			SendChatMessage(L["[GDKPd] This raid uses GDKPd to faciliate its GDKP bidding process. While you can bid on items without having GDKPd installed, installing it provides you with a GUI bidding panel, auto bidding functions, auction timers, chat filtering and more!"], "WHISPER", nil, f.name:GetText())
 		end
 		c=c+1
 		f=rawget(version.entries,c)
@@ -1389,7 +1470,7 @@ version.request = CreateFrame("Button", nil, version, "UIPanelButtonTemplate")
 version.request:SetSize(170,15)
 version.request:SetPoint("BOTTOM", version.notify, "TOP", 0, 5)
 version.request:SetText(L["Request version data"])
-version.request:SetScript("OnClick", function() GDKPd.hasRequestedData = true SendAddonMessage("GDKPD VREQ","poptix","RAID") end)
+version.request:SetScript("OnClick", function() GDKPd.hasRequestedData = true SendAddonMessage("GDKPD VREQ","","RAID") end)
 function version:Update()
 	if not GDKPd.hasRequestedData then return end
 	for _, f in ipairs(self.entries) do
@@ -1415,24 +1496,24 @@ function GDKPd:MailBalanceGold(targetName)
 	GDKPd_PotData.playerBalance[targetName] = 0
 	self.balance:Update()
 end
-GDKPd.balance = CreateFrame("Frame", "GDKPd_PlayerBalance", status, BackdropTemplateMixin and "BackdropTemplate")
+GDKPd.balance = CreateFrame("Frame", "GDKPd_PlayerBalance", status)
 local balance = GDKPd.balance
 balance:SetSize(200, 95)
 balance:SetBackdrop({
-	bgFile="Interface\\DialogFrame\\UI-DialogBox-Gold-Background",
-	edgeFile="Interface\\DialogFrame\\UI-DialogBox-Gold-Border",
+	bgFile="Interface\\DialogFrame\\UI-DialogBox-Background",
+	edgeFile="Interface\\DialogFrame\\UI-DialogBox-Border",
 	tileSize=32,
-	edgeSize=24,
+			 
 	tile=true,
 	insets={
-		top=6,
-		bottom=6,
-		right=6,
-		left=6,
+		top=12,
+		bottom=12,
+		right=12,
+		left=12,
 	},
 })
-balance.header = CreateFrame("Button", nil, balance, BackdropTemplateMixin and "BackdropTemplate")
-balance.header:SetNormalTexture("Interface\\DialogFrame\\UI-DialogBox-Gold-Header")
+balance.header = CreateFrame("Button", nil, balance)
+balance.header:SetNormalTexture("Interface\\DialogFrame\\UI-DialogBox-Header")
 balance.header:SetSize(133,34)
 balance.header:SetHitRectInsets(31.5,31.5,4.5,14.5)
 balance.header.text = balance.header:CreateFontString()
@@ -1462,7 +1543,7 @@ balance:SetScript("OnShow", function(self)
 	self:Update()
 end)
 balance.entries = setmetatable({}, {__index=function(t,v)
-	local f = CreateFrame("Button", nil, balance, BackdropTemplateMixin and "BackdropTemplate")
+	local f = CreateFrame("Button", nil, balance)
 	if v > 1 then
 		f:SetPoint("TOPLEFT", t[v-1], "BOTTOMLEFT", 0, -5)
 		f:SetPoint("TOPRIGHT", t[v-1], "BOTTOMRIGHT", 0, -5)
@@ -1559,7 +1640,7 @@ function balance:Update()
 		local f = self.entries[c]
 		f:Show()
 		f.amount:SetAmount(GDKPd_PotData.playerBalance[(UnitName("NPC"))])
-		MoneyInputFrame_SetCopper(TradePlayerInputMoneyFrame, (GDKPd_PotData.playerBalance[(UnitName("NPC"))]*10000));
+																												
 		f.name:SetText((UnitName("NPC")))
 		f:UpdateHeight()
 		isWidthIncreased = f.mail:UpdateState() or isWidthIncreased
@@ -1594,11 +1675,11 @@ function balance:Update()
 		end
 	end
 	self:SetHeight(size)
-	if size == 50 then
-		self:Hide()
-	else
-		self:Show()
-	end
+				   
+			 
+	 
+			 
+	
 	if isWidthIncreased then
 		for _, f in ipairs(self.entries) do
 			f.mail:Show()
@@ -1611,24 +1692,24 @@ function balance:Update()
 		self:SetWidth(200)
 	end
 end
-GDKPd.playerBalance = CreateFrame("Frame", "GDKPd_PlayerBalance", UIParent, BackdropTemplateMixin and "BackdropTemplate")
+GDKPd.playerBalance = CreateFrame("Frame", "GDKPd_PlayerBalance", UIParent)
 local playerBalance = GDKPd.playerBalance
 playerBalance:SetSize(200, 95)
 playerBalance:SetBackdrop({
-	bgFile="Interface\\DialogFrame\\UI-DialogBox-Gold-Background",
-	edgeFile="Interface\\DialogFrame\\UI-DialogBox-Gold-Border",
+	bgFile="Interface\\DialogFrame\\UI-DialogBox-Background",
+	edgeFile="Interface\\DialogFrame\\UI-DialogBox-Border",
 	tileSize=32,
-	edgeSize=24,
+			 
 	tile=true,
 	insets={
-		top=6,
-		bottom=6,
-		right=6,
-		left=6,
+		top=12,
+		bottom=12,
+		right=12,
+		left=12,
 	},
 })
-playerBalance.header = CreateFrame("Button", nil, playerBalance, BackdropTemplateMixin and "BackdropTemplate")
-playerBalance.header:SetNormalTexture("Interface\\DialogFrame\\UI-DialogBox-Gold-Header")
+playerBalance.header = CreateFrame("Button", nil, playerBalance)
+playerBalance.header:SetNormalTexture("Interface\\DialogFrame\\UI-DialogBox-Header")
 playerBalance.header:SetSize(133,34)
 playerBalance.header:SetHitRectInsets(31.5,31.5,4.5,14.5)
 playerBalance.header.text = playerBalance.header:CreateFontString()
@@ -1654,7 +1735,7 @@ playerBalance.reset:SetPoint("BOTTOM", 0, 15)
 playerBalance.reset:SetText(RESET)
 playerBalance.reset:SetScript("OnClick", function() GDKPd_BalanceData = setmetatable({},{__index=function() return 0 end}) GDKPd.playerBalance:Update() end)
 playerBalance.entries = setmetatable({}, {__index=function(t,v)
-	local f = CreateFrame("Button", nil, playerBalance, BackdropTemplateMixin and "BackdropTemplate")
+	local f = CreateFrame("Button", nil, playerBalance)
 	if v > 1 then
 		f:SetPoint("TOPLEFT", t[v-1], "BOTTOMLEFT", 0, -5)
 		f:SetPoint("TOPRIGHT", t[v-1], "BOTTOMRIGHT", 0, -5)
@@ -1729,24 +1810,24 @@ function playerBalance:Update()
 	self:SetHeight(size)
 	self:UpdateVisibility()
 end
-GDKPd.exportframe = CreateFrame("Frame", "GDKPd_Export", UIParent, BackdropTemplateMixin and "BackdropTemplate")
+GDKPd.exportframe = CreateFrame("Frame", "GDKPd_Export", UIParent)
 local export = GDKPd.exportframe
 export:Hide()
 export:SetBackdrop({
-	bgFile="Interface\\DialogFrame\\UI-DialogBox-Gold-Background",
-	edgeFile="Interface\\DialogFrame\\UI-DialogBox-Gold-Border",
+	bgFile="Interface\\DialogFrame\\UI-DialogBox-Background",
+	edgeFile="Interface\\DialogFrame\\UI-DialogBox-Border",
 	tileSize=32,
-	edgeSize=24,
+			 
 	tile=true,
 	insets={
-		top=6,
-		bottom=6,
-		right=6,
-		left=6,
+		top=12,
+		bottom=12,
+		right=12,
+		left=12,
 	},
 })
-export.header = CreateFrame("Button", nil, export, BackdropTemplateMixin and "BackdropTemplate")
-export.header:SetNormalTexture("Interface\\DialogFrame\\UI-DialogBox-Gold-Header")
+export.header = CreateFrame("Button", nil, export)
+export.header:SetNormalTexture("Interface\\DialogFrame\\UI-DialogBox-Header")
 export.header:SetSize(133,34)
 export.header:SetHitRectInsets(31.5,31.5,4.5,14.5)
 export.header.text = export.header:CreateFontString()
@@ -1762,7 +1843,7 @@ export.header:SetScript("OnMouseUp", function(self)
 	self:StopMovingOrSizing()
 end)
 export.header:SetPoint("TOP", history, "BOTTOM", 0, -10)
-export.box = CreateFrame("EditBox", nil, export, BackdropTemplateMixin and "BackdropTemplate")
+export.box = CreateFrame("EditBox", nil, export)
 export.box:SetMultiLine(true)
 export.box:SetAutoFocus(false)
 export.box:SetFont("Fonts\\FRIZQT__.TTF", 12)
@@ -1806,7 +1887,7 @@ export.toggleBB:SetScript("OnClick", function() export:SetType('BB') end)
 export.toggleDefault = CreateFrame("Button", nil, export, "UIPanelButtonTemplate")
 export.toggleDefault:SetSize(150,20)
 export.toggleDefault:SetPoint("RIGHT",export.toggleBB,"LEFT")
-export.toggleDefault:SetText("Tab Delimited")
+export.toggleDefault:SetText("Plain text")
 export.toggleDefault:SetScript("OnClick", function() export:SetType('Default') end)
 
 export.toggleBN = CreateFrame("Button", nil, export, "UIPanelButtonTemplate")
@@ -1824,7 +1905,7 @@ function export:Update()
 			elseif self.exportType == "BN" then
 				text = text.."\n[item=\""..aucdata.item:match("|Hitem:(%d+):").."\" /]: "..aucdata.name.." ("..aucdata.bid.." gold)"
 			else
-				text = text.."\n=HYPERLINK(\"http://classic.wowhead.com/item="..(aucdata.item:match("|Hitem:(%d+):")).."\",\""..aucdata.item:match("(|h.+|h)").."\")\t"..aucdata.name.."\t"..aucdata.bid
+				text = text.."\n"..(aucdata.item:match("(|h.+|h)"))..": "..aucdata.name.." ("..aucdata.bid.." gold)"
 			end
 		else
 			text = text.."\n"..L["Manual adjustment"]..": "..(aucdata > 0 and "+" or "")..aucdata.." gold"
@@ -1907,7 +1988,7 @@ function GDKPd:AnnounceLoot(shouldQueueAuctions)
 	local playerName = (UnitName("player"))
 	for numLoot=1, GetNumLootItems() do
 		if LootSlotIsItem(numLoot) then
-			local tex, item, quantity, currency, quality, isLocked = GetLootSlotInfo(numLoot)
+			local tex, item, quantity, quality, isLocked = GetLootSlotInfo(numLoot)
 			if quality >= minQuality then
 				tinsert(lootList, GetLootSlotLink(numLoot))
 				if self.opt.awardToML then
@@ -1925,7 +2006,7 @@ function GDKPd:AnnounceLoot(shouldQueueAuctions)
 			end
 		end
 	end
-	local lootString = L["Loot dropped: "]..lootList[1]
+	local lootString = L["[GDKPd] Loot dropped: "]..lootList[1]
 	for lootNum, link in ipairs(lootList) do
 		if lootNum > 1 then
 			if strlen(lootString)+strlen(link)+2 > 255 then
@@ -1964,7 +2045,7 @@ function GDKPd:AuctionOffItem(item, minbid, increment)
 	if (self.opt.allowMultipleAuctions) and (self.curAuctions[item]) then return end
 	if (not self.opt.allowMultipleAuctions) then
 		-- old code
-		SendChatMessage(("Bidding starts on %s. Please bid in raid chat, starting bid %d gold, minimum increment %d gold."):format(item,minbid,increment,self.opt.auctionTimer, self.opt.auctionTimerRefresh), (self.opt.announceRaidWarning and (IsRaidOfficer() or IsRaidLeader())) and "RAID_WARNING" or "RAID")
+		SendChatMessage(("[GDKPd] Bidding starts on %s. Please bid in raid chat, starting bid %d gold, minimum increment %d gold. TTL: %d/%d"):format(item,minbid,increment,self.opt.auctionTimer, self.opt.auctionTimerRefresh), (self.opt.announceRaidWarning and (IsRaidOfficer() or IsRaidLeader())) and "RAID_WARNING" or "RAID")
 		GDKPd.curAuction.item = item
 		GDKPd.curAuction.curBid = (minbid-increment)
 		GDKPd.curAuction.increment = increment
@@ -1972,7 +2053,7 @@ function GDKPd:AuctionOffItem(item, minbid, increment)
 		GDKPd.curAuction.timeRemains = self.opt.auctionTimer
 	else
 		-- new code
-		SendChatMessage(("Bidding starts on %s. Bid using format '[item] 1000', starting bid %d gold, minimum increment %d gold. TTL: %d/%d"):format(item,minbid,increment,self.opt.auctionTimer, self.opt.auctionTimerRefresh), (self.opt.announceRaidWarning and (IsRaidOfficer() or IsRaidLeader())) and "RAID_WARNING" or "RAID")
+		SendChatMessage(("[GDKPd] Bidding starts on %s. Bid using format '[item] 1000', starting bid %d gold, minimum increment %d gold. TTL: %d/%d"):format(item,minbid,increment,self.opt.auctionTimer, self.opt.auctionTimerRefresh), (self.opt.announceRaidWarning and (IsRaidOfficer() or IsRaidLeader())) and "RAID_WARNING" or "RAID")
 		local aucTable = emptytable()
 		aucTable.item = item
 		aucTable.curBid = (minbid-increment)
@@ -1992,7 +2073,7 @@ function GDKPd:RevertHighestBid(link)
 		table.sort(aucdata.bidders, function(a,b) return a.bidAmount > b.bidAmount end)
 		aucdata.bidders[aucdata.bidders[1].bidderName] = nil
 		tremove(aucdata.bidders,1)
-		SendChatMessage(("New highest bidder on %s: %s (%d gold)"):format(link, aucdata.bidders[1].bidderName, aucdata.bidders[1].bidAmount), (self.opt.announceBidRaidWarning and (IsRaidOfficer() or IsRaidLeader())) and "RAID_WARNING" or "RAID")
+		SendChatMessage(("[GDKPd] New highest bidder on %s: %s (%d gold)"):format(link, aucdata.bidders[1].bidderName, aucdata.bidders[1].bidAmount), (self.opt.announceBidRaidWarning and (IsRaidOfficer() or IsRaidLeader())) and "RAID_WARNING" or "RAID")
 		-- fix name-to-index assigns
 		for num, t in ipairs(aucdata.bidders) do
 			aucdata.bidders[t.bidderName] = num
@@ -2004,7 +2085,7 @@ function GDKPd:RevertHighestBid(link)
 		table.sort(self.curAuction.bidders, function(a,b) return a.bidAmount > b.bidAmount end)
 		self.curAuction.bidders[self.curAuction.bidders[1].bidderName] = nil
 		tremove(self.curAuction.bidders, 1)
-		SendChatMessage(("New highest bidder: %s (%d gold)"):format(self.curAuction.bidders[1].bidderName, self.curAuction.bidders[1].bidAmount), (self.opt.announceBidRaidWarning and (IsRaidOfficer() or IsRaidLeader())) and "RAID_WARNING" or "RAID")
+		SendChatMessage(("[GDKPd] New highest bidder: %s (%d gold)"):format(self.curAuction.bidders[1].bidderName, self.curAuction.bidders[1].bidAmount), (self.opt.announceBidRaidWarning and (IsRaidOfficer() or IsRaidLeader())) and "RAID_WARNING" or "RAID")
 		for num, t in ipairs(self.curAuction.bidders) do
 			self.curAuction.bidders[t.bidderName] = num
 		end
@@ -2017,10 +2098,10 @@ function GDKPd:CancelAuction(link)
 		if not link then return end
 		local aucdata = self.curAuctions[link]
 		if not aucdata then return end
-		SendChatMessage(("Auction cancelled for %s."):format(link), (self.opt.announceRaidWarning and (IsRaidOfficer() or IsRaidLeader())) and "RAID_WARNING" or "RAID")
+		SendChatMessage(("[GDKPd] Auction cancelled for %s."):format(link), (self.opt.announceRaidWarning and (IsRaidOfficer() or IsRaidLeader())) and "RAID_WARNING" or "RAID")
 		self.curAuctions[link] = nil
 	else
-		SendChatMessage("Auction cancelled.", (self.opt.announceRaidWarning and (IsRaidOfficer() or IsRaidLeader())) and "RAID_WARNING" or "RAID")
+		SendChatMessage("[GDKPd] Auction cancelled.", (self.opt.announceRaidWarning and (IsRaidOfficer() or IsRaidLeader())) and "RAID_WARNING" or "RAID")
 		table.wipe(self.curAuction)
 		if self.auctionList[1] then
 			self:AuctionOffItem(unpack(self.auctionList[1]))
@@ -2051,12 +2132,12 @@ function GDKPd:FinishAuction(link)
 					paymentString = paymentString..", "..thirdShare.." to "..aucdata.bidders[3].bidderName
 				end
 				paymentString = paymentString:format(remAmount)
-				SendChatMessage(("Auction finished for %s. Winner: %s. %s."):format(link, aucdata.bidders[1].bidderName, paymentString),"RAID")
+				SendChatMessage(("[GDKPd] Auction finished for %s. Winner: %s. %s."):format(link, aucdata.bidders[1].bidderName, paymentString),"RAID")
 				GDKPd_PotData.potAmount = (GDKPd_PotData.potAmount or 0)+remAmount
 				GDKPd_PotData.playerBalance[aucdata.bidders[1].bidderName] = GDKPd_PotData.playerBalance[aucdata.bidders[1].bidderName] -remAmount
 				GDKPd.balance:Update()
 				if self.opt.announcePotAfterAuction then
-					SendChatMessage("Current pot: "..GDKPd_PotData.potAmount.." gold","RAID")
+					SendChatMessage("[GDKPd] Current pot: "..GDKPd_PotData.potAmount.." gold","RAID")
 				end
 				tinsert(GDKPd_PotData.curPotHistory, {item=link, bid=totalAmount, name=aucdata.bidders[1].bidderName})
 				self.status:Update()
@@ -2079,7 +2160,7 @@ function GDKPd:FinishAuction(link)
 					end
 				end
 			else
-				SendChatMessage(("Auction finished for %s. No bids recieved."):format(link),"RAID")
+				SendChatMessage(("[GDKPd] Auction finished for %s. No bids recieved."):format(link),"RAID")
 			end
 			aucdata:Release()
 		end
@@ -2102,12 +2183,12 @@ function GDKPd:FinishAuction(link)
 				paymentString = paymentString..", "..thirdShare.." to "..self.curAuction.bidders[3].bidderName
 			end
 			paymentString = paymentString:format(remAmount)
-			SendChatMessage(("Auction finished. Winner: %s. %s."):format(self.curAuction.bidders[1].bidderName, paymentString),"RAID")
+			SendChatMessage(("[GDKPd] Auction finished. Winner: %s. %s."):format(self.curAuction.bidders[1].bidderName, paymentString),"RAID")
 			GDKPd_PotData.potAmount = (GDKPd_PotData.potAmount or 0)+remAmount
 			GDKPd_PotData.playerBalance[self.curAuction.bidders[1].bidderName] = GDKPd_PotData.playerBalance[self.curAuction.bidders[1].bidderName] -remAmount
 			GDKPd.balance:Update()
 			if self.opt.announcePotAfterAuction then
-				SendChatMessage("Current pot: "..GDKPd_PotData.potAmount.." gold","RAID")
+				SendChatMessage("[GDKPd] Current pot: "..GDKPd_PotData.potAmount.." gold","RAID")
 			end
 			tinsert(GDKPd_PotData.curPotHistory, {item=self.curAuction.item, bid=totalAmount, name=self.curAuction.bidders[1].bidderName})
 			self.status:Update()
@@ -2130,7 +2211,7 @@ function GDKPd:FinishAuction(link)
 				end
 			end
 		else
-			SendChatMessage("Auction finished. No bids recieved.","RAID")
+			SendChatMessage("[GDKPd] Auction finished. No bids recieved.","RAID")
 		end
 		self.curAuction.bidders:Release()
 		table.wipe(self.curAuction)
@@ -2146,18 +2227,18 @@ function GDKPd:DistributePot()
 	if not (numraid > 0) then return end
 	local distAmount = (GDKPd_PotData.potAmount or 0)-(GDKPd_PotData.prevDist or 0)
 	if distAmount <= 0 then return end
-	local numadditionalmemb = self.opt.AdditonalRaidMembersAmount
-	if self.opt.AdditionalRaidMembersEnable then
-		SendChatMessage(("Distributing pot. Pot size: %d gold. Amount to distribute: %d gold. Players in raid: %d(%d). Share per player: %d gold."):format((GDKPd_PotData.potAmount or 0), distAmount, numraid,numadditionalmemb, (distAmount or 0)/(numraid+numadditionalmemb)),"RAID")
-	else
-		SendChatMessage(("Distributing pot. Pot size: %d gold. Amount to distribute: %d gold. Players in raid: %d. Share per player: %d gold."):format((GDKPd_PotData.potAmount or 0), distAmount, numraid, (distAmount or 0)/numraid),"RAID")
-	end
+															  
+											 
+																																																																				  
+	 
+	SendChatMessage(("[GDKPd] Distributing pot. Pot size: %d gold. Amount to distribute: %d gold. Players in raid: %d. Share per player: %d gold."):format((GDKPd_PotData.potAmount or 0), distAmount, numraid, (distAmount or 0)/numraid),"RAID")
+	
 	for numRaid=1, numraid do
-		if self.opt.AdditionalRaidMembersEnable then
-			GDKPd_PotData.playerBalance[(UnitName("raid"..numRaid))] = GDKPd_PotData.playerBalance[(UnitName("raid"..numRaid))]+math.floor((distAmount or 0)/(numraid+numadditionalmemb))
-		else
-			GDKPd_PotData.playerBalance[(UnitName("raid"..numRaid))] = GDKPd_PotData.playerBalance[(UnitName("raid"..numRaid))]+math.floor((distAmount or 0)/numraid)
-		end
+											  
+																																												
+	  
+		GDKPd_PotData.playerBalance[(UnitName("raid"..numRaid))] = GDKPd_PotData.playerBalance[(UnitName("raid"..numRaid))]+math.floor((distAmount or 0)/numraid)
+	 
 	end
 	GDKPd_PotData.prevDist = GDKPd_PotData.potAmount
 	GDKPd.balance:Update()
@@ -2196,12 +2277,12 @@ function GDKPd:GetUnoccupiedFrame()
 		end
 		c=c+1
 	end
-	local f = CreateFrame("Frame", "GDKPdBidFrame"..c, UIParent, BackdropTemplateMixin and "BackdropTemplate")
+	local f = CreateFrame("Frame", "GDKPdBidFrame"..c, UIParent)
 	f:SetSize(300,60)
 	f:SetBackdrop({
 		bgFile="Interface\\Tooltips\\UI-Tooltip-Background",
 		tileSize=16,
-		edgeSize=24,
+			  
 		edgeFile="Interface\\Tooltips\\UI-Tooltip-Border",
 		tile=true,
 		edgeSize=16,
@@ -2240,12 +2321,12 @@ function GDKPd:GetUnoccupiedFrame()
 	f.highestbidder:SetFont("Fonts\\FRIZQT__.TTF", 10, "")
 	f.highestbidder:SetTextColor(1,1,1)
 	f.highestbidder:SetPoint("TOPLEFT", f.curbid, "BOTTOMLEFT", 0, -5)
-	f.timer = CreateFrame("Cooldown",nil,f, BackdropTemplateMixin and "BackdropTemplate")
+	f.timer = CreateFrame("Cooldown",nil,f)
 	-- omnicc stuff
 	f.timer.noCooldownCount = true
 	f.timer:SetReverse(true)
 	f.timer:SetAllPoints(f.icon)
-	f.timer.update = CreateFrame("Frame",nil,nil, BackdropTemplateMixin and "BackdropTemplate")
+	f.timer.update = CreateFrame("Frame")
 	f.timer.update:Hide()
 	f.timer.update:SetScript("OnUpdate", function(self)
 		local timeRemain = self.endTime-GetTime()
@@ -2282,7 +2363,7 @@ function GDKPd:GetUnoccupiedFrame()
 		f.autobid:Show()
 		f.hide:Enable()
 	end)
-	f.bidbox = CreateFrame("EditBox", nil, f, BackdropTemplateMixin and "BackdropTemplate")
+	f.bidbox = CreateFrame("EditBox", nil, f)
 	f.bidbox:SetMultiLine(nil)
 	f.bidbox:SetScript("OnEditFocusGained", function(self)
 		if self.disabled then
@@ -2327,7 +2408,7 @@ function GDKPd:GetUnoccupiedFrame()
 		end
 	end)
 	f.bid:Disable()
-	f.bid.enabledelay = CreateFrame("Frame", nil, f.bid, BackdropTemplateMixin and "BackdropTemplate")
+	f.bid.enabledelay = CreateFrame("Frame", nil, f.bid)
 	f.bid.enabledelay:Hide()
 	f.bid.enabledelay:SetScript("OnUpdate", function(self)
 		if not self.reenabletime then self:Hide() return end
@@ -2519,13 +2600,13 @@ local defaults={profile={
 	shareSecondAmount=0.33,
 	shareThirdEnable=false,
 	shareThirdAmount=0.11,
-	AdditionalRaidMembers=false,
-	AdditonalRaidMembersAmount=0,
-	auctionTimer=20,
-	auctionTimerRefresh=20,
+							 
+							  
+	auctionTimer=15,
+	auctionTimerRefresh=15,
 	movable=true,
-	startBid=20,
-	increment=5,
+	startBid=300,
+	increment=100,
 	minQuality=-1,
 	autoAwardLoot=false,
 	awardToML=false,
@@ -2538,9 +2619,9 @@ local defaults={profile={
 	hideChatMessages={
 		auctionAnnounce=false,
 		auctionAnnounceRW=false,
-		newBid=false,
+		newBid=true,
 		bidFinished=false,
-		secondsRemaining=false,
+		secondsRemaining=true,
 		bidChats=false,
 		potValues=false,
 		auctionCancel=false,
@@ -2556,7 +2637,7 @@ local defaults={profile={
 	appearAlpha=1,
 	appearScale=1,
 	controlScale=1,
-	bidButtonReenableDelay=0.2,
+	bidButtonReenableDelay=0.3,
 	slimML=false,
 	slimMLConfirmed=false,
 	confirmMailAll=true,
@@ -2677,32 +2758,32 @@ GDKPd.options={
 						},
 					},
 				},
-				AdditionalRaidMembers={
-					dialogInline=true,
-					name=L["Additional Raid Members"],
-					order=5,
-					type="group",
-					args={
-						isEnabled={
-							order=1,
-							type="toggle",
-							name=L["Enable"],
-							set=function(info,value) GDKPd.opt.AdditionalRaidMembersEnable = value end,
-							get=function() return GDKPd.opt.AdditionalRaidMembersEnable end,
-						},
-						shareAmount={
-							order=2,
-							type="range",
-							name=L["Amount"],
-							min=0,
-							max=40,
-							step=1,
-							isPercent=false,
-							set=function(info, value) GDKPd.opt.AdditonalRaidMembersAmount = value end,
-							get=function() return GDKPd.opt.AdditonalRaidMembersAmount end,
-						},
-					},
-				},
+						   
+					   
+									   
+			 
+				  
+		   
+				 
+			   
+					 
+						
+																				  
+																	   
+		
+				   
+			   
+					
+						
+			 
+			  
+			  
+					   
+																				  
+																	  
+		
+	   
+	  
 				minQuality={
 					type="select",
 					values=function()
@@ -2718,14 +2799,14 @@ GDKPd.options={
 					name=L["Minimum quality"],
 					set=function(info, value) GDKPd.opt.minQuality = value end,
 					get=function() return GDKPd.opt.minQuality end,
-					order=6,
+					order=5,
 					width="full",
 				},
 				auctionTimer={
 					type="range",
 					softMin=5,
 					softMax=30,
-					order=7,
+					order=6,
 					name=L["Auction timeout"],
 					desc=L["The amount of seconds that have to pass before the auction is closed without bids recieved"],
 					set=function(info, value) GDKPd.opt.auctionTimer = value end,
@@ -2735,7 +2816,7 @@ GDKPd.options={
 					type="range",
 					softMin=5,
 					softMax=30,
-					order=8,
+					order=7,
 					name=L["Auction bid timeout refresh"],
 					desc=L["The amount of seconds that have to pass after a bid before the auction is closed"],
 					set=function(info, value) GDKPd.opt.auctionTimerRefresh = value end,
@@ -2745,7 +2826,7 @@ GDKPd.options={
 					type="range",
 					softMin=1,
 					softMax=10,
-					order=8.5,
+					order=7.5,
 					name=L["Countdown timer announce interval"],
 					desc=L["The amount of seconds between each announcement of the remaining time"],
 					set=function(info, value) GDKPd.opt.countdownTimerJump = value end,
@@ -2757,7 +2838,7 @@ GDKPd.options={
 					set=function(info, value) GDKPd.opt.autoAwardLoot = value end,
 					get=function() return GDKPd.opt.autoAwardLoot end,
 					width="full",
-					order=9,
+					order=8,
 					disabled=function() return not not GDKPd.opt.awardToML end,
 				},
 				awardToML={
@@ -2766,7 +2847,7 @@ GDKPd.options={
 					set=function(info, value) GDKPd.opt.awardToML = value end,
 					get=function() return GDKPd.opt.awardToML end,
 					width="full",
-					order=10,
+					order=9,
 					disabled=function() return not not GDKPd.opt.autoAwardLoot end,
 				},
 				announceRW={
@@ -2775,7 +2856,7 @@ GDKPd.options={
 					set=function(info, value) GDKPd.opt.announceRaidWarning = value end,
 					get=function() return GDKPd.opt.announceRaidWarning end,
 					width="full",
-					order=11,
+					order=10,
 				},
 				announceRWBid={
 					type="toggle",
@@ -2783,7 +2864,7 @@ GDKPd.options={
 					width="full",
 					set=function(info, value) GDKPd.opt.announceBidRaidWarning = value end,
 					get=function() return GDKPd.opt.announceBidRaidWarning end,
-					order=12,
+					order=11,
 				},
 				allowMultiple={
 					type="toggle",
@@ -2792,7 +2873,7 @@ GDKPd.options={
 					set=function(info, value) GDKPd.opt.allowMultipleAuctions = value end,
 					get=function() return GDKPd.opt.allowMultipleAuctions end,
 					disabled=function() return ((GDKPd.curAuctions and (#GDKPd.curAuctions > 0)) or (GDKPd.curAuction.item)) end,
-					order=13,
+					order=12,
 				},
 				announcePotAfterAuction={
 					type="toggle",
@@ -2800,7 +2881,7 @@ GDKPd.options={
 					width="full",
 					set=function(info, value) GDKPd.opt.announcePotAfterAuction = value end,
 					get=function() return GDKPd.opt.announcePotAfterAuction end,
-					order=14,
+					order=13,
 				},
 				confirmMail={
 					type="toggle",
@@ -2808,7 +2889,7 @@ GDKPd.options={
 					width="full",
 					set=function(info, value) GDKPd.opt.confirmMail = value end,
 					get=function() return GDKPd.opt.confirmMail end,
-					order=15,
+					order=14,
 				},
 				linkBalancePot={
 					type="toggle",
@@ -2817,7 +2898,7 @@ GDKPd.options={
 					width="full",
 					set=function(info, value) GDKPd.opt.linkBalancePot = value end,
 					get=function() return GDKPd.opt.linkBalancePot end,
-					order=16,
+					order=15,
 				},
 			},
 			order=1,
@@ -3065,7 +3146,7 @@ GDKPd:SetScript("OnEvent", function(self, event, ...)
 					print(L["Cannot start auction without Master Looter privileges."])
 				end
 			elseif input:lower() == "ver" then
-				print(L["GDKPd version %s. Packaged %s."]:format(DEBUGFORCEVERSION or "2.0.0","2020-01-01T00:00:00Z"))
+				print(L["GDKPd version %s. Packaged %s."]:format(DEBUGFORCEVERSION or "1.4.2","2014-10-27T11:44:40Z"))
 			elseif input:lower() == "history" then
 				GDKPd.history:Show()
 			elseif input:lower() == "wipe" then
@@ -3091,19 +3172,19 @@ GDKPd:SetScript("OnEvent", function(self, event, ...)
 		local msg,sender = arg[1],pruneCrossRealm(arg[2])
 		--this is code for single-auction mode. put into a do branch to avoid local clashes.
 		do
-			local itemLink, minBid, bidIncrement, auctionTimer, auctionTimerRefresh = string.match(msg, "Bidding starts on (|c........|Hitem:.+|r). Please bid in raid chat, starting bid (%d+) gold, minimum increment (%d+) gold. TTL: (%d+)/(%d+)")
+			local itemLink, minBid, bidIncrement, auctionTimer, auctionTimerRefresh = string.match(msg, "%[GDKPd%] Bidding starts on (|c........|Hitem:.+|r). Please bid in raid chat, starting bid (%d+) gold, minimum increment (%d+) gold. TTL: (%d+)/(%d+)")
 			if not itemLink then
 				-- backwards comp number three
-				itemLink, minBid, bidIncrement, auctionTimer, auctionTimerRefresh = string.match(msg, "Bidding starts on (|c........|Hitem:.+|r). Please bid in raid chat, starting bid (%d+) gold, minimum increment (%d+) gold. TTL until expire: (%d+) seconds, TTL after bid: (%d+) seconds.")
+				itemLink, minBid, bidIncrement, auctionTimer, auctionTimerRefresh = string.match(msg, "%[GDKPd%] Bidding starts on (|c........|Hitem:.+|r). Please bid in raid chat, starting bid (%d+) gold, minimum increment (%d+) gold. TTL until expire: (%d+) seconds, TTL after bid: (%d+) seconds.")
 			end
 			if not itemLink then
 				-- backwords compability strikes again
-				itemLink, minBid, bidIncrement, auctionTimer = string.match(msg, "Bidding starts on (|c........|Hitem:.+|r). Please bid in raid chat, starting bid (%d+) gold, minimum increment (%d+) gold. TTL after a bid is placed: (%d+) seconds.")
+				itemLink, minBid, bidIncrement, auctionTimer = string.match(msg, "%[GDKPd%] Bidding starts on (|c........|Hitem:.+|r). Please bid in raid chat, starting bid (%d+) gold, minimum increment (%d+) gold. TTL after a bid is placed: (%d+) seconds.")
 				auctionTimerRefresh=auctionTimer
 			end
 			if not itemLink then
 				-- backwards version compability
-				itemLink, minBid, bidIncrement = string.match(msg, "Bidding starts on (|c........|Hitem:.+|r). Please bid in raid chat, starting bid (%d+) gold, minimum increment (%d+) gold.")
+				itemLink, minBid, bidIncrement = string.match(msg, "%[GDKPd%] Bidding starts on (|c........|Hitem:.+|r). Please bid in raid chat, starting bid (%d+) gold, minimum increment (%d+) gold.")
 				auctionTimer = 0
 				auctionTimerRefresh=0
 			end
@@ -3141,8 +3222,8 @@ GDKPd:SetScript("OnEvent", function(self, event, ...)
 					newBid = math.floor(newBid*1000)
 				end
 
-				-- Ignore obnoxiously large numbers, they break %d formats and are over gold cap anyway
-				if newBid < 999999999 and (self.curAuction.curBid + self.curAuction.increment) <= newBid then
+																						   
+				if (self.curAuction.curBid + self.curAuction.increment) <= newBid then
 					GDKPd.curAuction.curBid = newBid
 					if GDKPd.curAuction.bidders[sender] then
 						GDKPd.curAuction.bidders[GDKPd.curAuction.bidders[sender]].bidAmount = newBid
@@ -3150,11 +3231,11 @@ GDKPd:SetScript("OnEvent", function(self, event, ...)
 						tinsert(GDKPd.curAuction.bidders, {bidAmount=newBid, bidderName=sender})
 						GDKPd.curAuction.bidders[sender] = #GDKPd.curAuction.bidders
 					end
-					SendChatMessage(("New highest bidder: %s (%d gold)"):format(sender, newBid),(self.opt.announceBidRaidWarning and (IsRaidOfficer() or IsRaidLeader())) and "RAID_WARNING" or "RAID")
+					SendChatMessage(("[GDKPd] New highest bidder: %s (%d gold)"):format(sender, newBid),(self.opt.announceBidRaidWarning and (IsRaidOfficer() or IsRaidLeader())) and "RAID_WARNING" or "RAID")
 					self.curAuction.timeRemains = math.max(self.opt.auctionTimerRefresh, self.curAuction.timeRemains)
 				end
 			end
-			local bidderName, newBid = string.match(msg, "New highest bidder: (%S+) %((%d+) gold%)")
+			local bidderName, newBid = string.match(msg, "%[GDKPd%] New highest bidder: (%S+) %((%d+) gold%)")
 			if bidderName and self.InProgressBidFrame then
 				local isSelf = pruneCrossRealm(bidderName) == (UnitName("player"))
 				self.InProgressBidFrame:SetCurBid(newBid, bidderName, isSelf)
@@ -3168,11 +3249,11 @@ GDKPd:SetScript("OnEvent", function(self, event, ...)
 					end
 				end
 			end
-			if msg:find("Auction finished.") and GDKPd:PlayerIsML(sender,false) and self.InProgressBidFrame then
+			if msg:find("%[GDKPd%] Auction finished.") and GDKPd:PlayerIsML(sender,false) and self.InProgressBidFrame then
 				self.InProgressBidFrame:Hide()
 				self.InProgressBidFrame.isActive = false
 				self.InProgressBidFrame = nil
-				local winnerName, paymentString = msg:match("Auction finished. Winner: (%S+). (.+).")
+				local winnerName, paymentString = msg:match("%[GDKPd%] Auction finished. Winner: (%S+). (.+).")
 				if winnerName then
 					if pruneCrossRealm(winnerName) == (UnitName("player")) then
 						for targetAmount, targetName in paymentString:gmatch("(%d+) to (%S+)[%.,]") do
@@ -3200,7 +3281,7 @@ GDKPd:SetScript("OnEvent", function(self, event, ...)
 					end
 				end
 			end
-			if msg:find("Auction cancelled.") and GDKPd:PlayerIsML(sender, false) and self.InProgressBidFrame then
+			if msg:find("%[GDKPd%] Auction cancelled.") and GDKPd:PlayerIsML(sender, false) and self.InProgressBidFrame then
 				self.InProgressBidFrame.isActive = false
 				if GDKPd:PlayerIsML((UnitName("player")),true) then
 					local f = self.InProgressBidFrame
@@ -3220,13 +3301,13 @@ GDKPd:SetScript("OnEvent", function(self, event, ...)
 		end
 		-- this is new code for multi-auction. slight variations are used rl-side to indicate this.
 		do
-			local itemLink, minBid, bidIncrement, auctionTimer, auctionTimerRefresh = string.match(msg, "Bidding starts on (|c........|Hitem:.+|r). Bid using format '%[item%] 1000', starting bid (%d+) gold, minimum increment (%d+) gold. TTL: (%d+)/(%d+)")
+			local itemLink, minBid, bidIncrement, auctionTimer, auctionTimerRefresh = string.match(msg, "%[GDKPd%] Bidding starts on (|c........|Hitem:.+|r). Bid using format '%[item%] 1000', starting bid (%d+) gold, minimum increment (%d+) gold. TTL: (%d+)/(%d+)")
 			if not itemLink then
 				-- backwards to non-shortened
-				itemLink, minBid, bidIncrement, auctionTimer, auctionTimerRefresh = string.match(msg, "Bidding starts on (|c........|Hitem:.+|r). Bid using format '%[item%] 1000', starting bid (%d+) gold, minimum increment (%d+) gold. TTL until expire: (%d+) seconds, TTL after bid: (%d+) seconds.")
+				itemLink, minBid, bidIncrement, auctionTimer, auctionTimerRefresh = string.match(msg, "%[GDKPd%] Bidding starts on (|c........|Hitem:.+|r). Bid using format '%[item%] 1000', starting bid (%d+) gold, minimum increment (%d+) gold. TTL until expire: (%d+) seconds, TTL after bid: (%d+) seconds.")
 			end
 			if not itemLink then
-				itemLink, minBid, bidIncrement, auctionTimer = string.match(msg, "Bidding starts on (|c........|Hitem:.+|r). Please bid in raid chat, using format 'itemlink bid'. Starting bid (%d+) gold, minimum increment (%d+) gold. TTL after a bid is placed: (%d+) seconds.")
+				itemLink, minBid, bidIncrement, auctionTimer = string.match(msg, "%[GDKPd%] Bidding starts on (|c........|Hitem:.+|r). Please bid in raid chat, using format 'itemlink bid'. Starting bid (%d+) gold, minimum increment (%d+) gold. TTL after a bid is placed: (%d+) seconds.")
 				auctionTimerRefresh = auctionTimer
 			end
 			auctionTimer = tonumber(auctionTimer) or 0
@@ -3272,12 +3353,12 @@ GDKPd:SetScript("OnEvent", function(self, event, ...)
 							tinsert(aucdata.bidders, {bidAmount=bidAmount, bidderName=sender})
 							aucdata.bidders[sender] = #aucdata.bidders
 						end
-						SendChatMessage(("New highest bidder on %s: %s (%d gold)"):format(bidItemLink,sender,bidAmount),(self.opt.announceBidRaidWarning and (IsRaidOfficer() or IsRaidLeader())) and "RAID_WARNING" or "RAID")
+						SendChatMessage(("[GDKPd] New highest bidder on %s: %s (%d gold)"):format(bidItemLink,sender,bidAmount),(self.opt.announceBidRaidWarning and (IsRaidOfficer() or IsRaidLeader())) and "RAID_WARNING" or "RAID")
 						aucdata.timeRemains = math.max(aucdata.timeRemains, self.opt.auctionTimerRefresh)
 					end
 				end
 			end
-			local bidItem, bidderName, newBid = string.match(msg, "New highest bidder on (|c........|Hitem:.+|r): (%S+) %((%d+) gold%)")
+			local bidItem, bidderName, newBid = string.match(msg, "%[GDKPd%] New highest bidder on (|c........|Hitem:.+|r): (%S+) %((%d+) gold%)")
 			if bidderName and self:FetchFrameFromLink(bidItem) then
 				local isSelf = pruneCrossRealm(bidderName) == (UnitName("player"))
 				local bidFrame = self:FetchFrameFromLink(bidItem)
@@ -3292,12 +3373,12 @@ GDKPd:SetScript("OnEvent", function(self, event, ...)
 					end
 				end
 			end
-			local auctionEndItem = msg:match("Auction finished for (|c........|Hitem:.+|r).")
+			local auctionEndItem = msg:match("%[GDKPd%] Auction finished for (|c........|Hitem:.+|r).")
 			if auctionEndItem and GDKPd:PlayerIsML(sender,false) and self:FetchFrameFromLink(auctionEndItem) then
 				local f = self:FetchFrameFromLink(auctionEndItem)
 				f.isActive = false
 				f:Hide()
-				local winnerName, paymentString = msg:match("Auction finished for |c........|Hitem:.+|r%. Winner: (%S+)%. (.+)")
+				local winnerName, paymentString = msg:match("%[GDKPd%] Auction finished for |c........|Hitem:.+|r%. Winner: (%S+)%. (.+)")
 				if winnerName then
 					if pruneCrossRealm(winnerName) == (UnitName("player")) then
 						for targetAmount, targetName in paymentString:gmatch("(%d+) to (%S+)[%.,]") do
@@ -3325,7 +3406,7 @@ GDKPd:SetScript("OnEvent", function(self, event, ...)
 					end
 				end
 			end
-			local auctionCancelItem = msg:match("Auction cancelled for (|c........|Hitem:.+|r)%.")
+			local auctionCancelItem = msg:match("%[GDKPd%] Auction cancelled for (|c........|Hitem:.+|r)%.")
 			if auctionCancelItem and GDKPd:PlayerIsML(sender, false) and self:FetchFrameFromLink(auctionCancelItem) then
 				local f = self:FetchFrameFromLink(auctionCancelItem)
 				f.isActive = false
@@ -3345,9 +3426,9 @@ GDKPd:SetScript("OnEvent", function(self, event, ...)
 		end
 		-- generic code for both auction modes
 		do
-			local potAmount = msg:match("Distributing pot. Pot size: %d+ gold. Amount to distribute: %d+ gold. Players in raid: %d+. Share per player: (%d+) gold.")
+			local potAmount = msg:match("%[GDKPd%] Distributing pot. Pot size: %d+ gold. Amount to distribute: %d+ gold. Players in raid: %d+. Share per player: (%d+) gold.")
 			if not potAmount then
-				potAmount = msg:match("Distributing pot. Pot size: %d+ gold. Players in raid: %d+. Pot share per player: (%d+) gold.")
+				potAmount = msg:match("%[GDKPd%] Distributing pot. Pot size: %d+ gold. Players in raid: %d+. Pot share per player: (%d+) gold.")
 			end
 			if potAmount and self:PlayerIsML(sender,false) then
 				GDKPd_BalanceData[sender] = GDKPd_BalanceData[sender]-potAmount
@@ -3367,7 +3448,7 @@ GDKPd:SetScript("OnEvent", function(self, event, ...)
 				end
 			end
 			if arg[1] == "GDKPD VREQ" then
-				SendAddonMessage("GDKPD VDATA", DEBUGFORCEVERSION or "2.0.0", "WHISPER", arg[4])
+				SendAddonMessage("GDKPD VDATA", DEBUGFORCEVERSION or "1.4.2", "WHISPER", arg[4])
 			end
 			if arg[1] == "GDKPD VDATA" then
 				self.versions[sender] = arg[2]
@@ -3424,7 +3505,7 @@ GDKPd:SetScript("OnEvent", function(self, event, ...)
 		self.tradeMoneyOther = GetTargetTradeMoney()/10000
 	end
 	if (event == "UI_INFO_MESSAGE") then
-		if arg[2] == ERR_TRADE_COMPLETE then
+		if arg[1] == ERR_TRADE_COMPLETE then
 			--if self:PlayerIsML((UnitName("player")),true) and GDKPd_PotData.playerBalance[self.tradePartner] ~= 0 then
 			if self:PlayerIsML((UnitName("player")),true) then
 				if GDKPd_PotData.playerBalance[self.tradePartner] ~= 0 then
@@ -3467,7 +3548,7 @@ GDKPd:SetScript("OnEvent", function(self, event, ...)
 		self.status:UpdateVisibility(true)
 		self.playerBalance:UpdateVisibility(true)
 	end
-	if (event == "MAIL_CLOSED") or (event == "MAIL_INBOX_UPDATE") then
+	if (event == "MAIL_SHOW") or (event == "MAIL_CLOSED") then
 		self.balance:Update()
 	end
 	-- release table back into the pool of usable tables
@@ -3488,34 +3569,34 @@ GDKPd:RegisterEvent("UI_INFO_MESSAGE")
 GDKPd:RegisterEvent("TRADE_CLOSED")
 GDKPd:RegisterEvent("TRADE_SHOW")
 GDKPd:RegisterEvent("TRADE_ACCEPT_UPDATE")
-GDKPd:RegisterEvent("PLAYER_TRADE_MONEY")
+										 
 GDKPd:RegisterEvent("PLAYER_REGEN_ENABLED")
 GDKPd:RegisterEvent("PLAYER_REGEN_DISABLED")
-GDKPd:RegisterEvent("MAIL_INBOX_UPDATE")
+GDKPd:RegisterEvent("MAIL_SHOW")
 GDKPd:RegisterEvent("MAIL_CLOSED")
 
 --chat filters
 local function filterChat_CHAT_MSG_RAID(chatframe,event,msg)
 	--auctionAnnounce newBid bidFinished
-	if GDKPd.opt.hideChatMessages.auctionAnnounce and msg:match("Bidding starts on (|c........|Hitem:.+|r).")  then
+	if GDKPd.opt.hideChatMessages.auctionAnnounce and msg:match("%[GDKPd%] Bidding starts on (|c........|Hitem:.+|r).")  then
 		return true
 	end
-	if GDKPd.opt.hideChatMessages.newBid and msg:match("New highest bidder(.*): (%S+) %((%d+) gold%)") then
+	if GDKPd.opt.hideChatMessages.newBid and msg:match("%[GDKPd%] New highest bidder(.*): (%S+) %((%d+) gold%)") then
 		return true
 	end
-	if GDKPd.opt.hideChatMessages.bidFinished and msg:match("Auction finished") then
+	if GDKPd.opt.hideChatMessages.bidFinished and msg:match("%[GDKPd%] Auction finished") then
 		return true
 	end
-	if GDKPd.opt.hideChatMessages.secondsRemaining and msg:match("[Caution] (%d+) seconds remaining(.*)!") then
+	if GDKPd.opt.hideChatMessages.secondsRemaining and msg:match("%[GDKPd%] (%d+) seconds remaining(.*)!") then
 		return true
 	end
 	if GDKPd.opt.hideChatMessages.bidChats and (((msg:match("%d+") and (not msg:match("seconds remaining"))) and (GDKPd.InProgressBidFrame or GDKPd.curAuction.item)) or (msg:match("(|c........|Hitem:.+|r)%s*(%d+)") and (GDKPd:FetchFrameFromLink(msg:match("(|c........|Hitem:.+|r)")) or GDKPd.curAuctions[msg:match("(|c........|Hitem:.+|r)")]))) then
 		return true
 	end
-	if GDKPd.opt.hideChatMessages.potValues and msg:match("Current pot: (%d+) gold") then
+	if GDKPd.opt.hideChatMessages.potValues and msg:match("%[GDKPd%] Current pot: (%d+) gold") then
 		return true
 	end
-	if GDKPd.opt.hideChatMessages.auctionCancel and msg:match("Auction cancelled") then
+	if GDKPd.opt.hideChatMessages.auctionCancel and msg:match("%[GDKPd%] Auction cancelled") then
 		return true
 	end
 	return false
@@ -3525,13 +3606,13 @@ ChatFrame_AddMessageEventFilter("CHAT_MSG_RAID",filterChat_CHAT_MSG_RAID)
 ChatFrame_AddMessageEventFilter("CHAT_MSG_RAID_WARNING",filterChat_CHAT_MSG_RAID)
 ChatFrame_AddMessageEventFilter("CHAT_MSG_RAID_LEADER",filterChat_CHAT_MSG_RAID)
 ChatFrame_AddMessageEventFilter("CHAT_MSG_WHISPER_INFORM",function(chatframe,event,msg)
-	if msg:find(L["Your version of GDKPd is slightly outdated compared to the raid leader's. Full compability should be possible, however, you might want to take some time and update GDKPd."]:gsub("%[","%%["):gsub("%]","%%]")) then
+	if msg:find(L["[GDKPd] Your version of GDKPd is slightly outdated compared to the raid leader's. Full compability should be possible, however, you might want to take some time and update GDKPd."]:gsub("%[","%%["):gsub("%]","%%]")) then
 		return true
 	end
-	if msg:find(L["Your version of GDKPd is outdated and no longer compatible with the raid leader's in one or more functionalities. In order to ensure smooth performance, please update GDKPd."]:gsub("%[","%%["):gsub("%]","%%]")) then
+	if msg:find(L["[GDKPd] Your version of GDKPd is outdated and no longer compatible with the raid leader's in one or more functionalities. In order to ensure smooth performance, please update GDKPd."]:gsub("%[","%%["):gsub("%]","%%]")) then
 		return true
 	end
-	if msg:find(L["This raid uses GDKPd to faciliate its GDKP bidding process. While you can bid on items without having GDKPd installed, installing it provides you with a GUI bidding panel, auto bidding functions, auction timers, chat filtering and more!"]:gsub("%[","%%["):gsub("%]","%%]")) then
+	if msg:find(L["[GDKPd] This raid uses GDKPd to faciliate its GDKP bidding process. While you can bid on items without having GDKPd installed, installing it provides you with a GUI bidding panel, auto bidding functions, auction timers, chat filtering and more!"]:gsub("%[","%%["):gsub("%]","%%]")) then
 		return true
 	end
 end)
@@ -3541,13 +3622,13 @@ do
 	-- GLOBALS: RaidNotice_AddMessage
 	local oldmessage = RaidNotice_AddMessage
 	function RaidNotice_AddMessage(frame,text,...)
-		if GDKPd.opt.hideChatMessages.auctionAnnounceRW and text:match("Bidding starts on (|c........|Hitem:.+|r).") then
+		if GDKPd.opt.hideChatMessages.auctionAnnounceRW and text:match("%[GDKPd%] Bidding starts on (|c........|Hitem:.+|r).") then
 			return
 		end
-		if GDKPd.opt.hideChatMessages.auctionCancelRW and text:match("Auction cancelled") then
+		if GDKPd.opt.hideChatMessages.auctionCancelRW and text:match("%[GDKPd%] Auction cancelled") then
 			return
 		end
-		if GDKPd.opt.hideChatMessages.newBid and text:match("New highest bidder(.*): (%S+) %((%d+) gold%)") then
+		if GDKPd.opt.hideChatMessages.newBid and text:match("%[GDKPd%] New highest bidder(.*): (%S+) %((%d+) gold%)") then
 			return
 		end
 		oldmessage(frame,text,...)
@@ -3555,8 +3636,8 @@ do
 end
 --end raid warning frame filter
 --register addon msg prefixes
-C_ChatInfo.RegisterAddonMessagePrefix("GDKPD START")
-C_ChatInfo.RegisterAddonMessagePrefix("GDKPD VREQ")
-C_ChatInfo.RegisterAddonMessagePrefix("GDKPD VDATA")
-C_ChatInfo.RegisterAddonMessagePrefix("GDKPD MANADJ")
+RegisterAddonMessagePrefix("GDKPD START")
+RegisterAddonMessagePrefix("GDKPD VREQ")
+RegisterAddonMessagePrefix("GDKPD VDATA")
+RegisterAddonMessagePrefix("GDKPD MANADJ")
 --prefixes done
