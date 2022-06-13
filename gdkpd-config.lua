@@ -555,10 +555,264 @@
 					["minIncrement"] = 50,
 					["minBid"] = 2000,
 				},
-				[32510] = {
+				--Hydross
+				[30052] = {
+					["minIncrement"] = 50,
+					["minBid"] = 600,
+				},
+				[30055] = {
 					["minIncrement"] = 50,
 					["minBid"] = 1000,
 				},
+				[30049] = {
+					["minIncrement"] = 50,
+					["minBid"] = 800,
+				},
+				[30054] = {
+					["minIncrement"] = 50,
+					["minBid"] = 600,
+				},
+				[30050] = {
+					["minIncrement"] = 50,
+					["minBid"] = 600,
+				},
+				--Lurker
+				[30665] = {
+					["minIncrement"] = 50,
+					["minBid"] = 1000,
+				},
+				[33054] = {
+					["minIncrement"] = 50,
+					["minBid"] = 600,
+				},
+				[30058] = {
+					["minIncrement"] = 50,
+					["minBid"] = 600,
+				},
+				--Leo
+				[30627] = {
+					["minIncrement"] = 50,
+					["minBid"] = 2000,
+				},
+				[30092] = {
+					["minIncrement"] = 50,
+					["minBid"] = 600,
+				},
+				[30095] = {
+					["minIncrement"] = 50,
+					["minBid"] = 800,
+				},
+				[30239] = {
+					["minIncrement"] = 50,
+					["minBid"] = 800,
+				},
+				[30240] = {
+					["minIncrement"] = 50,
+					["minBid"] = 800,
+				},
+				[30241] = {
+					["minIncrement"] = 50,
+					["minBid"] = 800,
+				},
+				--Kara
+				[30090] = {
+					["minIncrement"] = 50,
+					["minBid"] = 600,
+				},
+				[30626] = {
+					["minIncrement"] = 50,
+					["minBid"] = 600,
+				},
+				[30101] = {
+					["minIncrement"] = 50,
+					["minBid"] = 600,
+				},
+				[30245] = {
+					["minIncrement"] = 50,
+					["minBid"] = 800,
+				},
+				[30246] = {
+					["minIncrement"] = 50,
+					["minBid"] = 800,
+				},
+				[30247] = {
+					["minIncrement"] = 50,
+					["minBid"] = 800,
+				},
+				--Moro
+				[30720] = {
+					["minIncrement"] = 50,
+					["minBid"] = 2000,
+				},
+				[30082] = {
+					["minIncrement"] = 50,
+					["minBid"] = 1000,
+				},
+				[30080] = {
+					["minIncrement"] = 50,
+					["minBid"] = 600,
+				},
+				[30008] = {
+					["minIncrement"] = 50,
+					["minBid"] = 600,
+				},
+				--Lady
+				[30106] = {
+					["minIncrement"] = 50,
+					["minBid"] = 2000,
+				},
+				[30107] = {
+					["minIncrement"] = 50,
+					["minBid"] = 2000,
+				},
+				[30105] = {
+					["minIncrement"] = 50,
+					["minBid"] = 1000,
+				},
+				[30110] = {
+					["minIncrement"] = 50,
+					["minBid"] = 800,
+				},
+				[30112] = {
+					["minIncrement"] = 50,
+					["minBid"] = 600,
+				},
+				[30109] = {
+					["minIncrement"] = 50,
+					["minBid"] = 600,
+				},
+				[30104] = {
+					["minIncrement"] = 50,
+					["minBid"] = 600,
+				},
+				[30103] = {
+					["minIncrement"] = 50,
+					["minBid"] = 600,
+				},
+				[30108] = {
+					["minIncrement"] = 50,
+					["minBid"] = 1000,
+				},
+				[30242] = {
+					["minIncrement"] = 50,
+					["minBid"] = 800,
+				},
+				[30243] = {
+					["minIncrement"] = 50,
+					["minBid"] = 800,
+				},
+				--Alar
+				[29947] = {
+					["minIncrement"] = 50,
+					["minBid"] = 1000,
+				},
+				[29949] = {
+					["minIncrement"] = 50,
+					["minBid"] = 600,
+				},
+				[32944] = {
+					["minIncrement"] = 50,
+					["minBid"] = 800,
+				},
+				[29948] = {
+					["minIncrement"] = 50,
+					["minBid"] = 800,
+				},
+				[29924] = {
+					["minIncrement"] = 50,
+					["minBid"] = 800,
+				},
+				--Void
+				[30450] = {
+					["minIncrement"] = 50,
+					["minBid"] = 1500,
+				},
+				[30248] = {
+					["minIncrement"] = 50,
+					["minBid"] = 800,
+				},
+				[30249] = {
+					["minIncrement"] = 50,
+					["minBid"] = 800,
+				},
+				[30250] = {
+					["minIncrement"] = 50,
+					["minBid"] = 800,
+				},
+				--Solarian
+				[29982] = {
+					["minIncrement"] = 50,
+					["minBid"] = 1000,
+				},
+				[29981] = {
+					["minIncrement"] = 50,
+					["minBid"] = 800,
+				},
+				[29966] = {
+					["minIncrement"] = 50,
+					["minBid"] = 600,
+				},
+				--KT
+				[32458] = {
+					["minIncrement"] = 200,
+					["minBid"] = 10000,
+				},
+				[29994] = {
+					["minIncrement"] = 50,
+					["minBid"] = 1000,
+				},
+				[32405] = {
+					["minIncrement"] = 50,
+					["minBid"] = 1000,
+				},
+				[29997] = {
+					["minIncrement"] = 50,
+					["minBid"] = 1000,
+				},
+				[29991] = {
+					["minIncrement"] = 50,
+					["minBid"] = 600,
+				},
+				[29995] = {
+					["minIncrement"] = 50,
+					["minBid"] = 600,
+				},
+				[29987] = {
+					["minIncrement"] = 50,
+					["minBid"] = 600,
+				},
+				[29992] = {
+					["minIncrement"] = 50,
+					["minBid"] = 800,
+				},
+				[29989] = {
+					["minIncrement"] = 50,
+					["minBid"] = 600,
+				},
+				[29993] = {
+					["minIncrement"] = 50,
+					["minBid"] = 1000,
+				},
+				[29996] = {
+					["minIncrement"] = 50,
+					["minBid"] = 800,
+				},
+				[29988] = {
+					["minIncrement"] = 50,
+					["minBid"] = 1000,
+				},
+				[30236] = {
+					["minIncrement"] = 50,
+					["minBid"] = 800,
+				},
+				[30237] = {
+					["minIncrement"] = 50,
+					["minBid"] = 800,
+				},
+				[30238] = {
+					["minIncrement"] = 50,
+					["minBid"] = 800,
+				}
 			},
 			["itemLevelPricing"] = {
 				{
